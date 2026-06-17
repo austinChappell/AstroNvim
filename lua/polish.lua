@@ -29,6 +29,13 @@ vim.lsp.config("eslint", {
   end,
 })
 
+-- Copy relative file path to clipboard
+vim.keymap.set("n", "<leader>yp", function()
+  local path = vim.fn.fnamemodify(vim.fn.expand("%"), ":.")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path)
+end, { desc = "Copy relative file path" })
+
 -- Move lines up and down
 vim.keymap.set("n", "<M-j>", ":m .+1<CR>==", { desc = "Move line down" })
 vim.keymap.set("n", "<M-k>", ":m .-2<CR>==", { desc = "Move line up" })
